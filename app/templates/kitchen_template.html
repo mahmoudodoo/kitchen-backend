@@ -1,0 +1,38 @@
+{% extends "home_template.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+
+<hr>
+
+<div class="container" align="center" style="border: darkgreen solid 5px;box-shadow: 5px 10px dimgray; padding-top: 5%; margin-top:10%; margin-bottom: 10%">
+    <h1>Add Kitchen:</h1>
+    {{ wtf.quick_form(add_form) }}
+</div>
+
+
+<hr >
+
+
+<div class="container" align="center" style="border: darkgreen solid 5px;box-shadow: 5px 10px dimgray; padding-top: 5%; margin-top:10%; margin-bottom: 10%">
+    <h1>Delete Kitchen:</h1>
+    {{ wtf.quick_form(delete_form) }}
+
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+        <li class="card" style="color: darkred;">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+
+</div>
+<hr>
+
+
+
+
+
+{% endblock %}

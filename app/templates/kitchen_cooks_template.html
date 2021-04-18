@@ -1,0 +1,41 @@
+{% extends "home_template.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div class="container box_container" align="center">
+    <div class="row">
+       
+        {% for cook in cooks %} 
+        <div class="column">
+            <div class="card" style="padding: 20px 20px 20px 20px; margin: 20px 20px 20px 20px;">
+                <img src="{{ url_for('static',filename='image/cook/'+ cook.public_id + '.png') }}" alt="No Image" width="100%" style="border-radius: 50%;">
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                {{ cook.name }}
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                <h4>Cook ID:</h4><h5 id="{{cook.public_id}}">{{ cook.public_id }}</h5> 
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                <button name="copy" onclick="clip_a('{{cook.public_id}}')">Copy</button>
+            </div>
+        </div>    
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function copyLink(a_string){
+        var input = document.createElement('input')
+        input.id="__copyText__";
+        input.value = a_string;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        var txt = input.value
+        input.remove()
+        console.log("OK COPIED: '"+txt+"'")
+    }
+    function clip_a(aId){
+       return copyLink(document.getElementById(aId).innerText)
+    }
+    </script>
+
+{% endblock %}

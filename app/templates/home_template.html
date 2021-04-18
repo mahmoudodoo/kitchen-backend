@@ -1,0 +1,87 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    My Kitchen
+{% endblock %}
+
+{% block navbar %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/card_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/style.css') }}">
+    <nav class="navbar navbar-fixed-top card" style="background-color: gray;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('home') }}"><img class="card" src=" {{ url_for('static',filename='image/logo.png') }}" style="border-radius: 50%; width: 100px;" alt="My Kitchen"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="card btnn"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle card btnn" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Admin
+                        </a>
+                      
+                        <div class="dropdown-menu card" aria-labelledby="dropdownMenuLink">
+                          <a class="dropdown-item card btnn" href="{{ url_for('kitchen') }}">Kitchen</a>
+                          <hr>
+                          <a class="dropdown-item card btnn" href="{{ url_for('cook') }}">Cook</a>
+                        </div>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_anonymous %}
+                    <li class="card btnn"><a href="{{ url_for('login') }}">Login</a></li>
+                    {% else %}
+                    <li class="card btnn"><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+
+{% block content %}
+<div class="container box_container" align="center">
+    <div  align="center">
+        <img class="card image_box" src=" {{ url_for('static',filename='image/logo2.jpg') }}"  alt="My Kitchen"></a>
+    </div>
+    <hr>
+    <div class="row">
+        {% for kitchen in kitchens %}
+        <div class="column">
+            <div class="card" style="padding: 20px 20px 20px 20px; margin: 20px 20px 20px 20px;">
+                <img src="{{ url_for('static',filename='image/kitchen/'+ kitchen.public_id + '.png') }}" alt="No Image" width="100%" style="border-radius: 50%;">
+                <hr >
+                <strong> {{ kitchen.name }} </strong>
+                <hr >
+            
+                <a class="card btnn" id="{{kitchen.public_id}}"  href="{{ url_for('kitchen_cooks',public_id=kitchen.public_id ) }}">Cooks</a> 
+                <hr >
+                <button class="btnn" onclick="copyLink('{{kitchen.public_id}}')">Copy ID</button>
+            </div>
+        </div>
+                              
+        {% endfor %}
+    </div>
+</div>
+<script>
+    function copyLink(a_string){
+        var input = document.createElement('input')
+        input.id="__copyText__";
+        input.value = a_string; 
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        var txt = input.value
+        input.remove()
+        alert("OK COPIED: '"+txt+"'")
+    }
+    // function clip_a(aId){
+    //    return copyLink(document.getElementById(aId).innerText)
+    // }
+    </script>
+{% endblock %}

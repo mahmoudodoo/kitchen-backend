@@ -1,0 +1,60 @@
+.btnn {
+    background-color: #ddd;
+    border: none;
+    color: black;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition: 0.3s;
+  }
+  
+  .btnn:hover {
+    background-color: #3e8e41;
+    color: white;
+    opacity: 1
+
+  }
+
+
+
+  .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
+
+  .box_container{
+    border: darkgreen solid 5px;
+    box-shadow: 5px 10px dimgray;
+    padding-top: 2%;
+    margin-top:10%;
+    margin-bottom: 20%;
+  }
+  
+  .image_box{
+    border-radius: 50%;
+    width: 40%;
+    margin-bottom: 5%;
+  }
+  hr{
+    height:2px;
+    border-width:0;
+    color:gray;
+    background-color:gray;
+  }

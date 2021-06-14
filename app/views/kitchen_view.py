@@ -25,7 +25,7 @@ def kitchen():
             Config.STATIC_PATH, 'image/kitchen', filename
         ))
         data = {'name':kitchen_name}
-        r= requests.post('http://127.0.0.1:5000/kitchens',json=data)
+        r= requests.post('http://3.142.45.234/kitchens',json=data)
         if r.ok:
             print('Kitchen has been added!!')
             kitchen = Kitchen.query.filter_by(kitchen_name=kitchen_name).first()
@@ -38,7 +38,7 @@ def kitchen():
     delete_form = DeleteKitchenForm()
     if delete_form.validate_on_submit():
         kitchen_id = delete_form.kitchen_id.data
-        r= requests.delete('http://127.0.0.1:5000/kitchens/{}'.format(kitchen_id))
+        r= requests.delete('http://3.142.45.234/kitchens/{}'.format(kitchen_id))
         if r.ok:
             image_path = os.path.join(Config.STATIC_PATH,'image/kitchen','{}.png'.format(kitchen_id))
             os.remove(image_path)
@@ -54,7 +54,7 @@ def kitchen():
 @login_required
 def kitchen_cooks(public_id):
     if request.method == 'GET':
-        r = requests.get('http://127.0.0.1:5000/cooks')
+        r = requests.get('http://3.142.45.234/cooks')
         try:
             cooks = r.json()['cooks']
             output_dict = [x for x in cooks if x['kitchen_id'] == public_id]

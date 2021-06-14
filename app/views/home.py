@@ -12,7 +12,7 @@ from app import Config
 @login_required
 def home():
     if request.method == 'GET':
-        r = requests.get('http://127.0.0.1:5000/kitchens')
+        r = requests.get('http://3.142.45.234/kitchens')
         try:
             kitchens = r.json()['kitchens']
         except KeyError:

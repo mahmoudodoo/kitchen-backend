@@ -14,7 +14,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         payload = {'name':form.username.data,'password':form.password.data}
-        r = requests.post('http://127.0.0.1:5000/users',json=payload) 
+        r = requests.post('http://3.142.45.234/users',json=payload) 
         if r.ok:
             flash('Congratulations, you are now a registered user!')
             return redirect(url_for('login'))

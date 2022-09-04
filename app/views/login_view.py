@@ -8,7 +8,7 @@ import requests
 from flask_login import logout_user,login_user,current_user
 
 
-
+host_name = "localhost:5000"
 
 # Create login form view
 @app.route('/', methods=['GET', 'POST'])
@@ -34,32 +34,3 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-# Create login form view
-# @app.route('/', methods=['GET', 'POST'])
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-
-#     form = LoginForm()
-#     user = form.username.data
-#     password = form.password.data
-#     if form.validate_on_submit():
-#         r = requests.get('http://127.0.0.1:5000/login_api',auth=requests.auth.HTTPBasicAuth(user, password))
-#         if r.ok:
-#             print(r.text)
-#             return redirect(url_for('home'))
-#         else:
-#             flash('Invalid username or password {}'.format(r.status_code))
-
-#     return render_template('login_template.html', title='Sign In', form=form)
-
-
-
-# def is_auth(self,username,password):
-#     r = requests.get('http://127.0.0.1:5000/login_api',auth=requests.auth.HTTPBasicAuth(user, password))
-#     print(r.text)
-
-# Create Log out function
-# @app.route('/logout')
-# def logout():
-#     logout_user()
-#     return redirect(url_for('login'))

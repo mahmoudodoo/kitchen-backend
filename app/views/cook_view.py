@@ -10,6 +10,9 @@ from app.models.cook_model import Cook
 from werkzeug.utils import secure_filename
 import os
 
+
+
+host_name = "localhost:5000"
 @app.route('/cook', methods=['GET', 'POST'])
 @login_required
 def cook():
@@ -31,7 +34,7 @@ def cook():
             'steps':steps,
             'kitchen_id':cook_kitchen.public_id
                 }
-        r= requests.post('http://3.142.45.234/cooks',json=data)
+        r= requests.post(f'http://{host_name}/cooks',json=data)
         if r.ok:
             print('Cook has been added!!')
             cook = Cook.query.filter_by(cook_name=cook_name).first()
@@ -45,7 +48,7 @@ def cook():
     delete_form = DeleteCookForm()
     if delete_form.validate_on_submit():
         cook_id = delete_form.cook_id.data
-        r= requests.delete('http://3.142.45.234/cooks/{}'.format(cook_id))
+        r= requests.delete(f'http://{host_name}/cooks/{cook_id}')
         if r.ok:
             image_path = os.path.join(Config.STATIC_PATH,'image/cook','{}.png'.format(cook_id))
             os.remove(image_path)

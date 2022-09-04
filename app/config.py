@@ -7,7 +7,7 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
-    SQLALCHEMY_DATABASE_URI ='postgresql://kitchenAdmin:admin123456@localhost/kitchen'
+    SQLALCHEMY_DATABASE_URI ='postgresql://admin:admin@localhost/kitchen'
     SQLALCHEMY_TRACK_MODIFICATIONS= False
     POSTS_PER_PAGE = 25
     STATIC_PATH = os.path.join(basedir,'static')

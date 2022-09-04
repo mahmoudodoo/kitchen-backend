@@ -7,12 +7,12 @@ import requests
 import os
 from app import Config
 
-
+host_name = "localhost:5000"
 @app.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
     if request.method == 'GET':
-        r = requests.get('http://3.142.45.234/kitchens')
+        r = requests.get(f'http://{host_name}/kitchens')
         try:
             kitchens = r.json()['kitchens']
         except KeyError:

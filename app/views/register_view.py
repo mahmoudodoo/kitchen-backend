@@ -9,12 +9,14 @@ from app import db
 from app.forms.register_form import RegistrationForm
 import requests
 
+
+host_name = "localhost:5000"
 @app.route('/register',methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         payload = {'name':form.username.data,'password':form.password.data}
-        r = requests.post('http://3.142.45.234/users',json=payload) 
+        r = requests.post(f'http://{host_name}/users',json=payload) 
         if r.ok:
             flash('Congratulations, you are now a registered user!')
             return redirect(url_for('login'))
